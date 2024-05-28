@@ -1,7 +1,7 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useQuery } from "@tanstack/react-query";
-import { getAllRaces } from "../../../../api/race/raceAPI";
 import { Race } from "../../../../api/race/types";
+import { useEffect, useState } from "react";
+import { useSocket } from "../../../../context/SocketContext";
 
 const columns = [
     { field: "id", headerName: "ID", width: 200 },
@@ -19,13 +19,30 @@ const columns = [
 ];
 
 export const RaceList = () => {
-    const { data = [], isLoading } = useQuery<Race[]>({
-        queryKey: ["races"],
-        queryFn: getAllRaces,
+    const { socket } = useSocket();
+
+    const [races, setRaces] = useState<Race[]>([]);
+
+    useEffect(() => {
+        if (socket) {
+            socket.emit("raceMessage", { type: "GET_RACES" });
+        }
+
+        return () => {
+            if (socket) {
+                socket.emit("raceMessage", { type: "DISCONNECT_RACES" });
+            }
+        };
+    }, [socket]);
+
+    socket?.on("raceMessage", (res) => {
+        const { data } = res;
+        setRaces(data || []);
     });
+
     return (
         <div>
-            <DataGrid rows={data} loading={isLoading} columns={columns} />
+            <DataGrid rows={races} columns={columns} />
         </div>
     );
 };
