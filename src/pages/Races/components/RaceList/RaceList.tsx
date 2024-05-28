@@ -4,7 +4,7 @@ import { getAllRaces } from "../../../../api/race/raceAPI";
 import { Race } from "../../../../api/race/types";
 
 const columns = [
-    { field: "_id", headerName: "ID", width: 200 },
+    { field: "id", headerName: "ID", width: 200 },
     { field: "name", headerName: "Name" },
     { field: "started_at", headerName: "Started At" },
     {
@@ -24,11 +24,8 @@ export const RaceList = () => {
         queryFn: getAllRaces,
     });
     return (
-        <DataGrid
-            rows={data}
-            loading={isLoading}
-            getRowId={(row) => row._id}
-            columns={columns}
-        />
+        <div>
+            <DataGrid rows={data} loading={isLoading} columns={columns} />
+        </div>
     );
 };
