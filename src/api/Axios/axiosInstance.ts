@@ -1,5 +1,4 @@
 import axios from "axios";
-import { redirect } from "react-router-dom";
 
 let isRefreshing = false;
 let refreshSubscribers: ((token: string) => void)[] = [];
@@ -19,6 +18,11 @@ const getRefreshToken = () => {
 export const setTokens = (accessToken: string, refreshToken: string) => {
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", refreshToken);
+};
+
+export const removeTokens = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
 };
 
 const addRefreshSubscriber = (callback: (token: string) => void) => {
