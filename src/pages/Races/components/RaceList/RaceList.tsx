@@ -20,12 +20,20 @@ const columns = [
 
 export const RaceList = () => {
     const { socket } = useSocket();
-
+    const [loading, setLoading] = useState(true);
     const [races, setRaces] = useState<Race[]>([]);
 
     useEffect(() => {
         if (socket) {
             socket.emit("raceMessage", { type: "GET_RACES" });
+
+            socket.on("raceMessage", (res) => {
+                const { data } = res;
+                if (data) {
+                    setRaces(data || []);
+                    setLoading(false);
+                }
+            });
         }
 
         return () => {
@@ -35,14 +43,13 @@ export const RaceList = () => {
         };
     }, [socket]);
 
-    socket?.on("raceMessage", (res) => {
-        const { data } = res;
-        setRaces(data || []);
-    });
-
     return (
-        <div>
-            <DataGrid rows={races} columns={columns} />
+        <div style={{ height: "500px", width: "100%" }}>
+            {loading ? (
+                <div>Loading...</div>
+            ) : (
+                <DataGrid rows={races} columns={columns} autoHeight />
+            )}
         </div>
     );
 };

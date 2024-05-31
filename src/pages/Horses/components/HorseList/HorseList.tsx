@@ -9,13 +9,14 @@ const columns = [
 ];
 
 export const HorseList = () => {
+    // TODO: Add long polling
     const { data = [], isLoading } = useQuery<Horse[]>({
         queryKey: ["horses"],
         queryFn: getAllHorses,
     });
 
     return (
-        <div>
+        <div style={{ height: "500px" }}>
             <DataGrid rows={data} loading={isLoading} columns={columns} />
         </div>
     );
