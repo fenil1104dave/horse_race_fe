@@ -9,7 +9,6 @@ const columns = [
 ];
 
 export const HorseList = () => {
-    // TODO: Add long polling
     const { data = [], isLoading } = useQuery<Horse[]>({
         queryKey: ["horses"],
         queryFn: getAllHorses,
