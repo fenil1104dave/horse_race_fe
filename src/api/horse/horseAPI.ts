@@ -1,4 +1,4 @@
-import { APICaller } from "../Axios";
+import api from "../Axios/axiosInstance";
 
 export const getAllHorses = () =>
-  APICaller.get("/horses").then((res) => res.data.data);
+    api.get("/horses").then((res) => res.data.data);

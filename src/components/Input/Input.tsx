@@ -1,5 +1,8 @@
+import { forwardRef } from "react";
 import { Input, InputProps } from "@mui/material";
 
-export const CommonInput: React.FC<InputProps> = (props) => {
-  return <Input {...props} />;
-};
+export const CommonInput = forwardRef<HTMLInputElement, InputProps>(
+    (props, ref) => {
+        return <Input {...props} inputRef={ref} />;
+    }
+);

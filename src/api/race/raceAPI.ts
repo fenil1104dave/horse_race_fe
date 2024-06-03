@@ -1,4 +1,3 @@
-import { APICaller } from "../Axios";
+import api from "../Axios/axiosInstance";
 
-export const getAllRaces = () =>
-  APICaller.get("/races").then((res) => res.data.data);
+export const getAllRaces = () => api.get("/races").then((res) => res.data.data);
