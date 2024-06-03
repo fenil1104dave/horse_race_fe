@@ -13,6 +13,7 @@ export const HorseList = () => {
     const { data = [], isLoading } = useQuery<Horse[]>({
         queryKey: ["horses"],
         queryFn: getAllHorses,
+        refetchInterval: 2000,
     });
 
     return (
