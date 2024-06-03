@@ -19,7 +19,7 @@ export const useSocket = (): ISocketContext => {
 };
 
 interface SocketProviderProps {
-    children: ReactNode; // Typing for children prop
+    children: ReactNode;
 }
 
 export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
