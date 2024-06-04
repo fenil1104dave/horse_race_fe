@@ -47,6 +47,7 @@ export const Login = () => {
                     <Controller
                         name="username"
                         control={control}
+                        rules={{ required: true }}
                         render={({ field }) => (
                             <CommonInput placeholder="Username" {...field} />
                         )}
@@ -54,6 +55,7 @@ export const Login = () => {
                     <Controller
                         name="password"
                         control={control}
+                        rules={{ required: true }}
                         render={({ field }) => (
                             <CommonInput
                                 placeholder="Password"
