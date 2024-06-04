@@ -10,7 +10,7 @@ const columns = [
     {
         field: "players",
         headerName: "Player",
-        valueGetter: (_, row: Race) =>
+        valueGetter: (_: unknown, row: Race) =>
             row.players
                 .map((player) => `${player.horse.name}(${player.lane_number})`)
                 .join(","),
